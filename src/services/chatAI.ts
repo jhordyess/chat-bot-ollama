@@ -2,6 +2,7 @@
 import { Ollama, type Message } from 'ollama'
 
 const DEEPSEEK_HOST = process.env.DEEPSEEK_HOST || ''
+const MODEL_NAME = process.env.MODEL_NAME || 'gemma3:1b'
 
 const ollama = new Ollama({ host: DEEPSEEK_HOST })
 
@@ -20,15 +21,19 @@ export const sendMessage2AI: SendMessage2AI = async ({ question, messageList }) 
     // Assemble the message history
     const messages: Message[] = messageList
       ? messageList.map((msg: { role: string; message: string }) => ({
-          role: msg.role === 'user' ? 'user' : 'model',
+          role: msg.role === 'user' ? 'user' : 'assistant',
           content: msg.message
         }))
       : []
 
     // Send the user's question and get the response
     const response = await ollama.chat({
-      model: 'deepseek-r1:1.5b',
-      messages: [...messages, { role: 'user', content: question }]
+      model: MODEL_NAME,
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        ...messages,
+        { role: 'user', content: question }
+      ]
     })
 
     return { response: response.message.content }
