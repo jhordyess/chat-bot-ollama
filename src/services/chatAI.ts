@@ -1,10 +1,10 @@
 'use server'
 import { Ollama, type Message } from 'ollama'
 
-const DEEPSEEK_HOST = process.env.DEEPSEEK_HOST || ''
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434'
 const MODEL_NAME = process.env.MODEL_NAME || 'gemma3:1b'
 
-const ollama = new Ollama({ host: DEEPSEEK_HOST })
+const ollama = new Ollama({ host: OLLAMA_HOST })
 
 type SendMessage2AI = (args: {
   question: string
