@@ -1,24 +1,9 @@
 'use server'
-import {
-  Content,
-  GoogleGenerativeAI,
-  HarmBlockThreshold,
-  HarmCategory
-} from '@google/generative-ai'
+import { Ollama, type Message } from 'ollama'
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY || ''
+const DEEPSEEK_HOST = process.env.DEEPSEEK_HOST || ''
 
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY)
-
-const model = genAI.getGenerativeModel({
-  model: 'gemini-1.5-flash',
-  safetySettings: [
-    {
-      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH
-    }
-  ]
-})
+const ollama = new Ollama({ host: DEEPSEEK_HOST })
 
 type SendMessage2AI = (args: {
   question: string
@@ -33,20 +18,20 @@ export const sendMessage2AI: SendMessage2AI = async ({ question, messageList }) 
     if (!question) return { error: 'Question is required' }
 
     // Assemble the message history
-    const history: Content[] = messageList
+    const messages: Message[] = messageList
       ? messageList.map((msg: { role: string; message: string }) => ({
           role: msg.role === 'user' ? 'user' : 'model',
-          parts: [{ text: msg.message }]
+          content: msg.message
         }))
       : []
 
-    // Create a chat session with the history
-    const chat = model.startChat({ history })
-
     // Send the user's question and get the response
-    const { response } = await chat.sendMessage(question)
+    const response = await ollama.chat({
+      model: 'deepseek-r1:1.5b',
+      messages: [...messages, { role: 'user', content: question }]
+    })
 
-    return { response: response.text() }
+    return { response: response.message.content }
   } catch (error) {
     if (error instanceof Error) {
       console.error('Error:', error.message)
