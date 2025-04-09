@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# Check if the MODEL_NAME environment variable is set
-if [ -z "$MODEL_NAME" ]; then
-  echo "MODEL_NAME environment variable is not set. Please set it to the desired model name."
-  exit 1
-fi
+# Check if MODEL_NAME environment variable is set, if not, set a default value
+MODEL=${MODEL_NAME:-"gemma3:1b"}
 
 # Start Ollama in the background
 echo "Starting Ollama..."
@@ -20,8 +17,8 @@ echo "Ollama started."
 
 # Pull the model
 echo "Pulling..."
-ollama pull $MODEL_NAME
-echo "Pulled $MODEL_NAME."
+ollama pull $MODEL
+echo "Pulled $MODEL."
 
 # Wait for Ollama process to finish
 wait $OLLAMA_PID
