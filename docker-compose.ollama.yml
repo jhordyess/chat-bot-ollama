@@ -10,6 +10,13 @@ services:
       - type: volume
         source: ollama_data
         target: /root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
   # openui:
   #   image: ghcr.io/open-webui/open-webui:main
   #   container_name: openui
