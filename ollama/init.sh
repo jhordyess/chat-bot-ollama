@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if the MODEL_NAME environment variable is set
+if [ -z "$MODEL_NAME" ]; then
+  echo "MODEL_NAME environment variable is not set. Please set it to the desired model name."
+  exit 1
+fi
+
 # Start Ollama in the background
 echo "Starting Ollama..."
 ollama serve &
@@ -12,11 +18,10 @@ until ollama -v >/dev/null 2>&1; do
 done
 echo "Ollama started."
 
-# Pull deepseek-r1 model with 1.5 billion parameters
-echo "Pulling deepseek-r1..."
-ollama pull deepseek-r1:1.5b
-
-echo "Pulled deepseek-r1:1.5b"
+# Pull the model
+echo "Pulling..."
+ollama pull $MODEL_NAME
+echo "Pulled $MODEL_NAME."
 
 # Wait for Ollama process to finish
 wait $OLLAMA_PID
