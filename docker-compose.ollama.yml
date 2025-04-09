@@ -1,0 +1,37 @@
+services:
+  ollama:
+    build:
+      context: ./ollama
+      dockerfile: Dockerfile
+      args:
+        - MODEL_NAME
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - type: volume
+        source: ollama_data
+        target: /root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+  # openui:
+  #   image: ghcr.io/open-webui/open-webui:main
+  #   container_name: openui
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - OLLAMA_BASE_URL=http://ollama:11434
+  #   depends_on:
+  #     - ollama
+  #   volumes:
+  #     - type: volume
+  #       source: openui_data
+  #       target: /app/backend/data
+
+volumes:
+  ollama_data: # openui_data:
