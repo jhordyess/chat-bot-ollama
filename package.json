@@ -1,6 +1,6 @@
 {
   "name": "chat-bot-ollama",
-  "description": "Chatbot using Ollama with chosen model.",
+  "description": "Chatbot using Ollama with the chosen model.",
   "version": "1.0.0",
   "author": "Jhordy Gavinchu <dev@jhordyess.com>",
   "keywords": [
