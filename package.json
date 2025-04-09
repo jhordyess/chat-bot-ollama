@@ -1,6 +1,6 @@
 {
-  "name": "chat-bot-deepseek-local",
-  "description": "Chatbot using local DeepSeek",
+  "name": "chat-bot-ollama",
+  "description": "Chatbot using Ollama with chosen model.",
   "version": "1.0.0",
   "author": "Jhordy Gavinchu <dev@jhordyess.com>",
   "keywords": [
@@ -8,8 +8,8 @@
     "react",
     "typescript",
     "tailwindcss",
-    "deepseek",
     "ollama",
+    "docker",
     "chatbot"
   ],
   "license": "MIT",
@@ -20,7 +20,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "docker": "docker compose -f docker-compose.ollama.yml up -d --build"
+    "docker": "docker compose -f docker-compose.ollama.yml up -d --build",
+    "docker:rm": "docker compose -f docker-compose.ollama.yml down -v"
   },
   "dependencies": {
     "next": "15.2.4",
