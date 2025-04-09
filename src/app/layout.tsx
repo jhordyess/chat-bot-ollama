@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Chat Bot App',
-  description: 'A simple chat bot app using Next.js and Gemini API',
+  description: 'A simple chat bot app using Next.js and Ollama',
   icons: {
     shortcut:
       'https://res.cloudinary.com/jhordyess/image/upload/v1667836186/global/favicon.svg.svg',
