@@ -3,6 +3,8 @@ services:
     build:
       context: ./ollama
       dockerfile: Dockerfile
+      args:
+        - MODEL_NAME
     container_name: ollama
     ports:
       - "11434:11434"
