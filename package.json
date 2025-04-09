@@ -1,6 +1,6 @@
 {
-  "name": "chat-bot-gemini",
-  "description": "Chatbot using Google Gemini API",
+  "name": "chat-bot-deepseek-local",
+  "description": "Chatbot using local DeepSeek",
   "version": "1.0.0",
   "author": "Jhordy Gavinchu <dev@jhordyess.com>",
   "keywords": [
@@ -8,8 +8,8 @@
     "react",
     "typescript",
     "tailwindcss",
-    "google",
-    "gemini",
+    "deepseek",
+    "ollama",
     "chatbot"
   ],
   "license": "MIT",
@@ -22,8 +22,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.0",
     "next": "15.2.4",
+    "ollama": "^0.5.14",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
