@@ -19,7 +19,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "docker": "docker compose -f docker-compose.ollama.yml up -d --build"
   },
   "dependencies": {
     "next": "15.2.4",
