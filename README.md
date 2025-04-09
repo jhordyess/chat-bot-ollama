@@ -1,32 +1,47 @@
 # Chat Bot App
 
-A simple chat bot application built using Next.js and the Gemini API.
+A simple chat bot application built using Next.js and Ollama.
 
 ## Description
 
-The Chat Bot App allows users to interact with a chatbot powered by the Gemini API. It is designed to provide a seamless and responsive user experience with a clean and modern UI.
+The Chat Bot App allows users to interact with a chatbot powered by the Ollama. The app provides a user-friendly interface for sending messages and receiving responses from the chatbot.
+
+- Ollama is configured to run in a Docker container.
+- Pre-configured with NVIDIA GPU support for better performance.
+- By default, it uses the [`gemma3:1b`](https://ollama.com/library/gemma3:1b) model, but you can change it to any other model available in the [Ollama library](https://ollama.com/library).
 
 ### Technologies Used
 
-- JS Libraries: [Google AI SDK for JavaScript](https://www.npmjs.com/package/@google/generative-ai)
+- JS Libraries: [Ollama-js](https://www.npmjs.com/package/ollama)
 - Framework: [Next.js](https://nextjs.org/)
 - Fonts: [Geist](https://fonts.google.com/specimen/Geist), [Geist Mono](https://fonts.google.com/specimen/Geist+Mono)
 - Styling: [Tailwind CSS](https://tailwindcss.com/)
 - Programming Language: [TypeScript](https://www.typescriptlang.org/)
+- Containerization: [Docker](https://www.docker.com/)
 
 ## How to use
 
 1. Clone the repository:
 
 ```bash
-git clone git@github.com:jhordyess/chat-bot-gemini.git
+git clone git@github.com:jhordyess/chat-bot-ollama.git
 ```
 
 2. Open the project folder:
 
 ```bash
-cd chat-bot-gemini
+cd chat-bot-ollama
 ```
+
+3. Prepare the environment:
+
+- Make sure you have [Docker](https://www.docker.com/) installed and running on your machine.
+- Make sure you have [Node.js](https://nodejs.org/en/download) installed on your machine.
+- Set up the NVIDIA Container Toolkit for Docker to enable GPU support. Follow the instructions in the [NVIDIA documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation) to install the NVIDIA Container Toolkit. If you are using Ubuntu, use my custom [bash script](./ollama/nvidia.sh).
+```bash
+bash ./ollama/nvidia.sh
+```
+- (Optional) Set up the environment variables. Create a `.env` file in the root directory of the project, following the example in [`.env.example`](./.env.example). You can set the `MODEL_NAME` variable to specify the model you want to use. By default, it uses `gemma3:1b`.
 
 3. Install the dependencies:
 
@@ -34,17 +49,7 @@ cd chat-bot-gemini
 yarn install
 ```
 
-4. Create a `.env` file in the root directory and add your Gemini API key:
-
-```env
-GEMINI_API_KEY=your_api_key_here
-```
-
-Replace `your_api_key_here` with your actual Gemini API key.
-You can obtain an API key by signing up on the [Google AI Studio](https://aistudio.google.com/app/apikey). Follow the instructions to generate an API key and copy it to your `.env` file.
-
-
-5. Run the project:
+4. Run the project:
 
 ```bash
 yarn dev
