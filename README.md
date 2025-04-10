@@ -43,19 +43,28 @@ bash ./ollama/nvidia.sh
 ```
 - (Optional) Set up the environment variables. Create a `.env` file in the root directory of the project, following the example in [`.env.example`](./.env.example). You can set the `MODEL_NAME` variable to specify the model you want to use. By default, it uses `gemma3:1b`.
 
-3. Install the dependencies:
+4. Run the Docker service:
+
+```bash
+yarn docker
+
+# or
+docker compose -f docker-compose.ollama.yml up -d --build
+```
+
+4. Install the dependencies:
 
 ```bash
 yarn install
 ```
 
-4. Run the project:
+5. Run the project:
 
 ```bash
 yarn dev
 ```
 
-5. Open the browser at <http://localhost:3000/>
+6. Open the browser at <http://localhost:3000/>
 
 ## To-Do
 
